@@ -6,8 +6,8 @@ export function GET(
   { params }: { params: { id: number } }
 ) {
   if (params.id > 10)
-    return NextRequest.json({ error: "User not found" }, { status: 404 });
-  return NextResponse.json({ id: 1, name: "Stephen" });
+    return NextRequest.json({ error: "Product not found" }, { status: 404 });
+  return NextResponse.json({ id: 1, name: "Stephen", price: "5" });
 }
 
 export async function PUT(
@@ -23,10 +23,10 @@ export async function PUT(
   //fetchowanie uzytkownika z danym id
   //jesli nie istnieje uzytkownik z tym id-> 404
   if (params.id > 10)
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
+    return NextResponse.json({ error: "Product not found" }, { status: 404 });
   //w innym przypadku aktualizacja uzytkownika
   //zwracamy zaaktualizowanego uzytkownika
-  return NextResponse.json({ id: 1, name: body.name });
+  return NextResponse.json({ id: 1, name: body.name, price: body.price });
 }
 
 export async function DELETE(
@@ -36,7 +36,7 @@ export async function DELETE(
   //fetchowanie uzytkownika z db
   //jesli nie znaleziony 404
   if (params.id > 10)
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
+    return NextResponse.json({ error: "Product not found" }, { status: 404 });
   //usuwamy uzytkownika z bazy
   //res 200
   return NextResponse.json({});
