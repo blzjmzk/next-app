@@ -10,6 +10,7 @@ const NavBar = () => {
     <div className="flex bg-slate-200 p-5 space-x-3">
       <Link href="/">Home</Link>
       <Link href="/users">Users</Link>
+      <Link href="/dashboard">Dashboard</Link>
       {status === "authenticated" && (
         <div>
           {session.user!.name}
