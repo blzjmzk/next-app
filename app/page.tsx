@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import ProductCard from "./components/ProductCard";
+import testimage from "@/public/images/test-image.jpeg";
 import { getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth/next";
@@ -22,6 +21,7 @@ export default async function Home() {
   return (
     <main>
       <h1> Home {session && <span>{session.user!.name}</span>}</h1>
+      <Image src={testimage} alt={"Landscape"} />
     </main>
   );
 }
