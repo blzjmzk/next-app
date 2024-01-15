@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import schema from "../schema";
-import { prisma } from "@/prisma/client";
+import prisma from "@/prisma/client";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const user = await prisma.user.findUnique({
-    where: { id: parseInt(params.id) },
+    where: { id: params.id },
   });
   if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -29,7 +29,7 @@ export async function PUT(
   //jesli nie istnieje uzytkownik z tym id-> 404
   const user = await prisma.user.findUnique({
     where: {
-      id: parseInt(params.id),
+      id: params.id,
     },
   });
 
@@ -54,7 +54,7 @@ export async function DELETE(
 ) {
   //fetchowanie uzytkownika z db
   const user = await prisma.user.findUnique({
-    where: { id: parseInt(params.id) }, //kryteria
+    where: { id: params.id }, //kryteria
   });
   //jesli nie znaleziony 404
   if (!user)

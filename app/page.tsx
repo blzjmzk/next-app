@@ -1,27 +1,28 @@
 import Image from "next/image";
 import testimage from "@/public/images/test-image.jpeg";
 import { getServerSession } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import NextAuth from "next-auth/next";
+import { authHandler } from "@/app/auth";
 
-export const authOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
-};
-
-const handler = NextAuth(authOptions);
-
-export default async function Home() {
-  const session = await getServerSession(authOptions);
-
+export default function Home() {
   return (
     <main>
-      <h1> Home {session && <span>{session.user!.name}</span>}</h1>
-      <Image src={testimage} alt={"Landscape"} />
+      <h1> Home</h1>
+      <AuthenticatedContent />
     </main>
+  );
+}
+
+async function AuthenticatedContent() {
+  const session = await getServerSession();
+
+  return (
+    <div>
+      <Image src={testimage} alt={"Landscape"} />
+      {session ? (
+        <>
+          <p>Welcome, {session.user!.name}!</p>
+        </>
+      ) : null}
+    </div>
   );
 }
